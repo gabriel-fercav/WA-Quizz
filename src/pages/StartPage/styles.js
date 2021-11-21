@@ -18,7 +18,7 @@ export const PageContainer = styled.main`
         flex-direction: column;
         align-items: center;
         justify-content: space-around;
-        height: 25%;
+        height: 30%;
     }
 
 `
