@@ -1,19 +1,17 @@
-import { Button, TextField } from '@material-ui/core'
+import { TextField } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
-import { useState, useContext } from 'react'
+import { useContext, useState } from 'react'
 import { QuizzContext } from '../../providers/QuizzProvider'
 import { PageContainer } from './styles'
+import Btn from '../../components/GenericButton'
 
 const StartPage = () => {
 
-    const [quizzAmmount, setQuizzAmmount] = useState("")
     const { callQuizz } = useContext(QuizzContext)
+    const [ amm, setAmm ] = useState("")
     const history = useHistory()
 
-    const handleQuizz = (ammount) => {
-        if (ammount < 1) {
-            ammount = 5
-        }
+    const startQuizz = (ammount) => {
         callQuizz(ammount)
         history.push('/quizz')
     }
@@ -25,17 +23,15 @@ const StartPage = () => {
 
                 <TextField style={{ width: '150px', color: 'grey', borderColor: 'grey' }}
                     size='small'
-                    value={quizzAmmount}
+                    value={amm}
                     variant="outlined"
                     placeholder="Digite a quantidade"
-                    onChange={(e) => setQuizzAmmount(e.target.value)}
+                    onChange={(e) => setAmm(e.target.value)}
                 />
 
-                <Button style={{ height: '50px', width: '150px', color: 'grey', borderColor: 'grey' }}
-                    variant="outlined" onClick={() => handleQuizz(quizzAmmount)}>Start</Button>
+                <Btn onClick={(e) => startQuizz(amm)}>Start</Btn>
 
-                <Button style={{ height: '50px', width: '150px', color: 'grey', borderColor: 'grey' }}
-                    variant="outlined" onClick={() => history.push('/')}>Cancel</Button>
+                <Btn onClick={() => history.push('/')}>Cancel</Btn>
             </div>
         </PageContainer>
     )

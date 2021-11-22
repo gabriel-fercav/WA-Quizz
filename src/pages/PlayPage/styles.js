@@ -8,7 +8,7 @@ export const PageContainer = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     box-sizing: border-box;
 
     .form_container {
@@ -22,5 +22,14 @@ export const PageContainer = styled.main`
     .card_container {
         width: 50%;
     }
+
+    @media (max-width: 900px) {
+            padding: 10px 0px;
+
+            .card_container {
+                width: 90%;
+            }
+        }
+
 
 `

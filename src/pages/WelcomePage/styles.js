@@ -13,11 +13,20 @@ export const PageContainer = styled.main`
 
     .logo_container {
         display: flex;
+        position: relative;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         width: 100%;
-        height: 35%;
+        height: 40%;
+    }
+
+    .message_container {
+        display: flex;
+        height: 20%;
+        flex-direction: column;
+        align-content: center;
+        justify-content: space-around;
     }
 
     .logo_container-message {
@@ -30,7 +39,8 @@ export const PageContainer = styled.main`
 
     .logo_container-quizz {
         width: 100%;
-        height: 400px;
+        position: absolute;
+        height: 500px;
         object-fit: contain;
     }
 

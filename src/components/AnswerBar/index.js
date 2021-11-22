@@ -1,12 +1,12 @@
 import { FormControlLabel, Radio } from '@material-ui/core'
 import { QuizzContext } from '../../providers/QuizzProvider'
+import { ImCheckmark, ImCross } from 'react-icons/im'
 import { useContext } from 'react'
 
 export const AnswerBar = ({ string, finished }) => {
 
 
     const { selectedAnswers, rightAnswers } = useContext(QuizzContext)
-    console.log(selectedAnswers)
 
     return (
         <>
@@ -18,31 +18,28 @@ export const AnswerBar = ({ string, finished }) => {
                     value={string} />
                 : selectedAnswers.includes(string) && rightAnswers.includes(string) ?
                     <FormControlLabel
-                        label={string + "------ CORRETA"}
+                        label={<><ImCheckmark/> {string}</>}
                         color="default"
                         disabled
                         control={<Radio checked />}
                         value={string} />
                     : selectedAnswers.includes(string) ?
                         <FormControlLabel
-                            label={string}
+                            label={<><ImCross/> {string}</>}
                             color="default"
-                            disabled
-                            control={<Radio checked />}
+                            control={<Radio disabled checked />}
                             value={string} />
                         : rightAnswers.includes(string) ?
                             <FormControlLabel
-                                label={string + "------ CORRETA"}
+                                label={<><ImCheckmark/> {string}</>}
                                 color="default"
-                                disabled
-                                control={<Radio />}
+                                control={<Radio disabled/>}
                                 value={string} />
                             :
                             <FormControlLabel
-                                label={string}
+                                label={<><ImCross/> {string}</>}
                                 color="default"
-                                disabled
-                                control={<Radio />}
+                                control={<Radio disabled/>}
                                 value={string} />
 
             }

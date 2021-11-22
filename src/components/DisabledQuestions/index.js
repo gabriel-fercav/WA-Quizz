@@ -2,8 +2,7 @@ import {
     Card, CardContent, makeStyles, Chip,
     Typography, Divider, RadioGroup
 } from '@material-ui/core'
-import { useContext, useEffect, useState } from 'react'
-import { QuizzContext } from '../../providers/QuizzProvider'
+import { useEffect, useState } from 'react'
 import { shuffler } from '../../utils/shuffler'
 import AnswerBar from '../AnswerBar'
 
@@ -21,15 +20,8 @@ const useStyles = makeStyles({
 
 export const QuestionCard = ({ obj, id }) => {
 
-    const { setSelected, selectedAnswers } = useContext(QuizzContext)
-    const [localAnswers, setLocalAnswers] = useState([])
+    const [ localAnswers, setLocalAnswers ] = useState([])
     const classes = useStyles()
-
-    const recordSelection = (answer, objId) => {
-        let newSelection = [...selectedAnswers]
-        newSelection[objId] = answer
-        setSelected(newSelection)
-    }
 
     const shuffle = (obj) => {
         let allAnswers = [obj.correct_answer, ...obj.incorrect_answers]
@@ -51,12 +43,13 @@ export const QuestionCard = ({ obj, id }) => {
                 <Typography className={classes.question}>{obj.question}</Typography>
             </CardContent>
             <CardContent className={classes.questionSection}>
-                <RadioGroup onClick={(e) => recordSelection(e.target.value, id)}>
+                <RadioGroup>
                     {localAnswers.map((x, y) =>
+
                             <AnswerBar
                                 key={y}
                                 string={x}
-                                finished={false}
+                                finished={true}
                             />
                     )
                     }

@@ -1,6 +1,6 @@
-import { Button } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import { PageContainer } from './styles.js'
+import Btn from '../../components/GenericButton/index.js'
 import QuizzLogo from '../../assets/QuizzLogo.png'
 
 const WelcomePage = () => {
@@ -14,8 +14,8 @@ const WelcomePage = () => {
                 <img className='logo_container-quizz' src={QuizzLogo} alt='QuizzLogo' />
             </div>
             <div className='message_container' >
-                <Button style={{ height: '50px', width: '150px', color: 'grey', borderColor: 'grey' }}
-                    variant="outlined" onClick={() => history.push("/start")}>CLICK TO PLAY</Button>
+                <Btn onClick={() => history.push("/start")}>CLICK TO PLAY</Btn>
+                <Btn onClick={() => history.push("/review")}>REVIEW RESULTS</Btn>
             </div >
         </PageContainer >
     )
