@@ -51,4 +51,24 @@ export const PageContainer = styled.div`
         height: 20%;
     }
 
+    @media (min-width: 1920px) {
+        .logo_container {
+            height: 30%;
+        }  
+
+        .message_container {
+            height: 15%;
+        }
+
+        .logo_container-message {
+            font-size: 7.7rem;
+        }
+
+        .logo_container-quizz {
+            height: 800px;
+        }
+
+
+    }
+
 `

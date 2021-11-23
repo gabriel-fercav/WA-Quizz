@@ -26,7 +26,7 @@ export const FinalPage = () => {
                         data.questions?.map((x, y) => <Grid item key={y} xs={12}><DisabledQuestions id={y} key={y} obj={x} /></Grid>)
                     }
                 </Grid>
-                <div class="wrapper">
+                <div className="wrapper">
                     {location.pathname === '/results' ?
                         <Typography variant="h5" >Você acertou {score} de {quizz.length} perguntas!</Typography>
                         :

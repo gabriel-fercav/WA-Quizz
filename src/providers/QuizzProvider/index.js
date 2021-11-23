@@ -10,6 +10,7 @@ export const QuizzProvider = ({ children }) => {
     const history = useHistory()
     const [quizz, setQuizz] = useState([])
     const [ammount, setAmmount] = useState([])
+    const [dif, setDif] = useState("")
     const [score, setScore] = useState(0)
     const [rightAnswers, setRightAnswers] = useState([])
     const [selectedAnswers, setSelected] = useState([])
@@ -17,7 +18,18 @@ export const QuizzProvider = ({ children }) => {
 
     const [isLoading, setIsLoading] = useState(true)
 
-    const callQuizz = (ammount) => {
+    const callQuizz = (ammount, dif) => {
+        if (dif !== "mixed") {
+            axios.get(`https://opentdb.com/api.php?amount=${ammount}&difficulty=${dif}`)
+            .then(response => {
+                setQuizz(response.data.results)
+                localStorage.clear()
+                localStorage.setItem('@quizz:question', JSON.stringify(response.data.results))
+            })
+            .catch((err) => console.log(err))
+            .finally( () => setIsLoading(false))
+
+        } else { 
         axios.get(`https://opentdb.com/api.php?amount=${ammount}`)
             .then(response => {
                 setQuizz(response.data.results)
@@ -26,6 +38,7 @@ export const QuizzProvider = ({ children }) => {
             })
             .catch((err) => console.log(err))
             .finally( () => setIsLoading(false))
+        }
     }
 
     const findScore = () => {
@@ -36,7 +49,7 @@ export const QuizzProvider = ({ children }) => {
             }
         }
 
-        setScore(counter) // TÁ BUGADO ESSA SOLUÇÃO DE SETTAR SCORE, RESOLVER
+        setScore(counter)
     }
 
     const finishQuizz = () => {
@@ -70,7 +83,9 @@ export const QuizzProvider = ({ children }) => {
                 finishQuizz,
                 isLoading,
                 callQuizz,
-                score
+                score,
+                dif,
+                setDif
             }}>
             {children}
         </QuizzContext.Provider>

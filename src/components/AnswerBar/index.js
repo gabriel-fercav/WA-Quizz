@@ -17,7 +17,7 @@ export const AnswerBar = ({ string, finished, id }) => {
         // no arr de selectedAnswers (ou seja, selectedAnswers[1] tem
         // a resposta selecionada para primeiro componente)
         // Assim sendo, se selectedAnswers[id] === string
-        // isso significa que a string passada é a selecionada
+        // isso significa que a string passada é a selecionada.
         // Mesma lógica se aplica para rightAnswers[id]
 
         for (let i = 0; i < selectedAnswers.length; i++) {

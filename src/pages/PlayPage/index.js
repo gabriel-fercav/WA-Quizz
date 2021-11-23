@@ -20,7 +20,7 @@ export const PlayPage = () => {
                         <Grid container spacing={3}>
                             {quizz?.map((x, y) => <Grid key={y} item xs={12}><QuestionCard id={y} key={y} obj={x} /></Grid>)}
                         </Grid>
-                        <div class="wrapper">
+                        <div className="wrapper">
                             <Typography variant="h5" >Click to view results!</Typography>
                             <Btn onClick={() => finishQuizz()}>Encerrar</Btn>
                         </div>
