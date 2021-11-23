@@ -3,10 +3,66 @@ import { QuizzContext } from '../../providers/QuizzProvider'
 import { ImCheckmark, ImCross } from 'react-icons/im'
 import { useContext } from 'react'
 
-export const AnswerBar = ({ string, finished }) => {
+export const AnswerBar = ({ string, finished, id }) => {
 
 
-    const { selectedAnswers, rightAnswers } = useContext(QuizzContext)
+    const { selectedAnswers } = useContext(QuizzContext)
+
+    const rightAnswers = JSON.parse(localStorage.getItem('@quizz:rightanswers'))
+
+    const checkQuestions = () => {
+
+        // Recebe uma string (vinda das perguntas do componente)
+        // Recebe o ID (id) do componente, que correlaciona com a posição
+        // no arr de selectedAnswers (ou seja, selectedAnswers[1] tem
+        // a resposta selecionada para primeiro componente)
+        // Assim sendo, se selectedAnswers[id] === string
+        // isso significa que a string passada é a selecionada
+        // Mesma lógica se aplica para rightAnswers[id]
+
+        for (let i = 0; i < selectedAnswers.length; i++) {
+            if (string === selectedAnswers[id]
+                && string === rightAnswers[id]) {
+                return (
+                    <FormControlLabel
+                        label={<><ImCheckmark /> {string}</>}
+                        color="default"
+                        disabled
+                        control={<Radio checked />}
+                        value={string} />
+                )
+            } 
+            
+            if (string === selectedAnswers[id]) {
+                return (
+                    <FormControlLabel
+                        label={<><ImCross /> {string}</>}
+                        color="default"
+                        disabled
+                        control={<Radio checked />}
+                        value={string} />
+                )
+            }  
+            
+            if (string === rightAnswers[id]) {
+                return (
+                    <FormControlLabel
+                        label={<><ImCheckmark /> {string}</>}
+                        color="default"
+                        control={<Radio disabled />}
+                        value={string} />
+                )
+            }
+                return (
+                    <FormControlLabel
+                        label={<><ImCross /> {string}</>}
+                        color="default"
+                        control={<Radio disabled />}
+                        value={string} />
+                )
+        }
+    }
+
 
     return (
         <>
@@ -16,32 +72,7 @@ export const AnswerBar = ({ string, finished }) => {
                     color="default"
                     control={<Radio />}
                     value={string} />
-                : selectedAnswers.includes(string) && rightAnswers.includes(string) ?
-                    <FormControlLabel
-                        label={<><ImCheckmark/> {string}</>}
-                        color="default"
-                        disabled
-                        control={<Radio checked />}
-                        value={string} />
-                    : selectedAnswers.includes(string) ?
-                        <FormControlLabel
-                            label={<><ImCross/> {string}</>}
-                            color="default"
-                            control={<Radio disabled checked />}
-                            value={string} />
-                        : rightAnswers.includes(string) ?
-                            <FormControlLabel
-                                label={<><ImCheckmark/> {string}</>}
-                                color="default"
-                                control={<Radio disabled/>}
-                                value={string} />
-                            :
-                            <FormControlLabel
-                                label={<><ImCross/> {string}</>}
-                                color="default"
-                                control={<Radio disabled/>}
-                                value={string} />
-
+                : checkQuestions()
             }
         </>
     )

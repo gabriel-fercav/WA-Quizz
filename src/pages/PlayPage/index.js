@@ -1,24 +1,32 @@
-import { PageContainer } from './styles.js'
-import { Grid } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import { useContext } from 'react'
 import { QuizzContext } from '../../providers/QuizzProvider/index.js'
-import QuestionCard from '../../components/QuestionCard/index.js'
 import Btn from '../../components/GenericButton/index.js'
+import QuestionCard from '../../components/QuestionCard/index.js'
+import CardContainer from '../../components/CardContainer/index.js'
+import { Bars } from 'react-loading-icons'
 
 export const PlayPage = () => {
 
-    
-    const { quizz, finishQuizz } = useContext(QuizzContext)
+
+    const { quizz, finishQuizz, isLoading } = useContext(QuizzContext)
 
     return (
-        <PageContainer>
-            <div className="card_container">
-                <Grid container spacing={3}>
-                    {quizz?.map((x, y) => <Grid key={y} item xs={12}><QuestionCard id={y} key={y} obj={x} /></Grid>)}
-                </Grid>
-                <Btn onClick={() => finishQuizz()}>Encerrar</Btn>
-            </div>
-        </PageContainer>
+        <>
+            {isLoading ?
+                <Bars />
+                :
+                    <CardContainer>
+                        <Grid container spacing={3}>
+                            {quizz?.map((x, y) => <Grid key={y} item xs={12}><QuestionCard id={y} key={y} obj={x} /></Grid>)}
+                        </Grid>
+                        <div class="wrapper">
+                            <Typography variant="h5" >Click to view results!</Typography>
+                            <Btn onClick={() => finishQuizz()}>Encerrar</Btn>
+                        </div>
+                    </CardContainer>
+            }
+        </>
     )
 
 }

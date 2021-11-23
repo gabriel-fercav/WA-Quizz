@@ -3,26 +3,25 @@ import StartPage from '../pages/StartPage'
 import WelcomePage from '../pages/WelcomePage'
 import PlayPage from '../pages/PlayPage'
 import FinalPage from '../pages/FinalPage'
-import ReviewPage from '../pages/ReviewPage'
 
 const Routes = () => {
 
     return (
         <Switch>
             <Route exact path="/">
-                <WelcomePage/>
+                <WelcomePage />
             </Route>
             <Route path="/start">
-                <StartPage/>
+                <StartPage />
             </Route>
             <Route path="/quizz">
-                <PlayPage/>
+                <PlayPage />
             </Route>
             <Route path="/results">
-                <FinalPage/>
+                <FinalPage />
             </Route>
             <Route path="/review">
-                <ReviewPage/>
+                <FinalPage />
             </Route>
         </Switch>
     )

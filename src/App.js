@@ -1,11 +1,12 @@
 import './App.css';
+import PageContainer from './components/PageContainer';
 import Routes from './routes'
 
 function App() {
   return (
-    <div className="App">
+    <PageContainer>
       <Routes/>
-    </div>
+    </PageContainer>
   );
 }
 

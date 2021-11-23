@@ -3,7 +3,6 @@ import {
     Typography, Divider, RadioGroup
 } from '@material-ui/core'
 import { useEffect, useState } from 'react'
-import { shuffler } from '../../utils/shuffler'
 import AnswerBar from '../AnswerBar'
 
 const useStyles = makeStyles({
@@ -20,16 +19,16 @@ const useStyles = makeStyles({
 
 export const QuestionCard = ({ obj, id }) => {
 
-    const [ localAnswers, setLocalAnswers ] = useState([])
+    const [localAnswers, setLocalAnswers] = useState([])
     const classes = useStyles()
 
-    const shuffle = (obj) => {
+    const handleAnswers = (obj) => {
         let allAnswers = [obj.correct_answer, ...obj.incorrect_answers]
-        setLocalAnswers(shuffler(allAnswers))
+        setLocalAnswers(allAnswers)
     }
 
     useEffect(() => {
-        shuffle(obj)
+        handleAnswers(obj)
     }, [obj])
 
     return (
@@ -46,11 +45,12 @@ export const QuestionCard = ({ obj, id }) => {
                 <RadioGroup>
                     {localAnswers.map((x, y) =>
 
-                            <AnswerBar
-                                key={y}
-                                string={x}
-                                finished={true}
-                            />
+                        <AnswerBar
+                            key={y}
+                            string={x}
+                            id={id}
+                            finished={true}
+                        />
                     )
                     }
                 </RadioGroup>

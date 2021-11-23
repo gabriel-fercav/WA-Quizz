@@ -1,10 +1,9 @@
 import styled from 'styled-components'
 
-export const PageContainer = styled.main`
+export const PageContainer = styled.div`
     position: relative;
     width: 100vw;
     height: 100vh;
-    background-color: rgb(253, 231, 97);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,7 +33,7 @@ export const PageContainer = styled.main`
         font-size: 4.7rem;
         font-family: 'Roboto';
         bottom: 51%;
-        color: #323232;
+        color: grey;
     }
 
     .logo_container-quizz {

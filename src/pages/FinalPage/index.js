@@ -1,25 +1,40 @@
-import { PageContainer } from './styles.js'
-import { useHistory } from 'react-router'
-import { Grid } from '@material-ui/core'
+import { useHistory, useLocation } from 'react-router'
+import { Grid, Typography } from '@material-ui/core'
 import { useContext } from 'react'
 import { QuizzContext } from '../../providers/QuizzProvider/index.js'
-import DisabledQuestions from '../../components/DisabledQuestions/index.js'
+import './styles.css'
 import Btn from '../../components/GenericButton/index.js'
+import DisabledQuestions from '../../components/DisabledQuestions/index.js'
+import CardContainer from '../../components/CardContainer/index.js'
 
 export const FinalPage = () => {
 
-    const { quizz } = useContext(QuizzContext)
+    const { score, quizz } = useContext(QuizzContext)
+    const data = {
+        questions: JSON.parse(localStorage.getItem('@quizz:question')),
+        score: JSON.parse(localStorage.getItem('@quizz:score'))
+    }
+    const location = useLocation()
     let history = useHistory()
 
     return (
-        <PageContainer>
-            <div className="card_container">
+            <CardContainer>
                 <Grid container spacing={3}>
-                    {quizz?.map((x, y) => <Grid item key={y} xs={12}><DisabledQuestions id={y} key={y} obj={x} /></Grid>)}
+                    {location.pathname === '/results' ?
+                        quizz?.map((x, y) => <Grid item key={y} xs={12}><DisabledQuestions id={y} key={y} obj={x} /></Grid>)
+                        :
+                        data.questions?.map((x, y) => <Grid item key={y} xs={12}><DisabledQuestions id={y} key={y} obj={x} /></Grid>)
+                    }
                 </Grid>
-                <Btn onClick={() => history.push("/")}>Página Inicial</Btn>
-            </div>
-        </PageContainer>
+                <div class="wrapper">
+                    {location.pathname === '/results' ?
+                        <Typography variant="h5" >Você acertou {score} de {quizz.length} perguntas!</Typography>
+                        :
+                        <Typography variant="h5" >Você acertou {data.score} de {data.questions.length} perguntas!</Typography>
+                    }
+                    <Btn onClick={() => history.push("/")}>Página Inicial</Btn>
+                </div>
+            </CardContainer>
     )
 
 }

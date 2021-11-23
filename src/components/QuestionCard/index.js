@@ -56,6 +56,7 @@ export const QuestionCard = ({ obj, id }) => {
                             <AnswerBar
                                 key={y}
                                 string={x}
+                                id={id}
                                 finished={false}
                             />
                     )
